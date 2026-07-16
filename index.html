@@ -568,35 +568,45 @@
             </div>
 
             <div class="window-body" style="background: #ffffff; color: #000000; padding: 15px;">
-                <!-- FORM DI CONTATTO -->
+                <!-- FORM DI CONTATTO (Puntato a Formspree) -->
                 <form id="xp-contact-form" action="https://formspree.io/f/mpqvqvdk" method="POST" style="display: flex; flex-direction: column; gap: 12px; font-family: Tahoma, sans-serif;">
+                    
+                    <!-- Campi visibili all'utente (NON hanno l'attributo 'name' nativo, per evitare che Formspree li legga direttamente e si confonda) -->
                     
                     <!-- Campo Nome (Opzionale) -->
                     <div style="display: flex; align-items: center; border-bottom: 1px solid #e0dfdb; padding-bottom: 8px;">
-                        <label for="from-name" style="width: 80px; font-size: 0.8rem; color: #716f64; font-weight: bold;">From:</label>
-                        <input type="text" id="from-name" name="name" placeholder="Anonymous Sender" style="flex-grow: 1; border: none; outline: none; font-size: 0.85rem; padding: 2px 5px; background: transparent;">
+                        <label for="user-name" style="width: 80px; font-size: 0.8rem; color: #716f64; font-weight: bold;">From:</label>
+                        <input type="text" id="user-name" placeholder="Anonymous Sender" style="flex-grow: 1; border: none; outline: none; font-size: 0.85rem; padding: 2px 5px; background: transparent;">
                         <span style="font-size: 0.7rem; color: #a0a0a0; padding-right: 5px; font-style: italic;">[optional]</span>
                     </div>
 
-                    <!-- Campo Email (Ora Opzionale) -->
+                    <!-- Campo Email (Opzionale) -->
                     <div style="display: flex; align-items: center; border-bottom: 1px solid #e0dfdb; padding-bottom: 8px;">
-                        <label for="from-email" style="width: 80px; font-size: 0.8rem; color: #716f64; font-weight: bold;">Email:</label>
-                        <input type="email" id="from-email" name="email" placeholder="your_email@domain.com" style="flex-grow: 1; border: none; outline: none; font-size: 0.85rem; padding: 2px 5px; background: transparent; color: #000;">
+                        <label for="user-email" style="width: 80px; font-size: 0.8rem; color: #716f64; font-weight: bold;">Email:</label>
+                        <input type="email" id="user-email" placeholder="your_email@domain.com" style="flex-grow: 1; border: none; outline: none; font-size: 0.85rem; padding: 2px 5px; background: transparent; color: #000;">
                         <span style="font-size: 0.7rem; color: #a0a0a0; padding-right: 5px; font-style: italic;">[optional]</span>
                     </div>
 
-                    <!-- Campo Oggetto (Obbligatorio) -->
+                    <!-- Campo Oggetto (Opzionale) -->
                     <div style="display: flex; align-items: center; border-bottom: 1px solid #e0dfdb; padding-bottom: 8px;">
-                        <label for="subject" style="width: 80px; font-size: 0.8rem; color: #716f64; font-weight: bold;">Subject:</label>
-                        <input type="text" id="subject" name="_subject" required placeholder="808s_Feedback_System" style="flex-grow: 1; border: none; outline: none; font-size: 0.85rem; padding: 2px 5px; background: transparent; color: #000;">
+                        <label for="user-subject" style="width: 80px; font-size: 0.8rem; color: #716f64; font-weight: bold;">Subject:</label>
+                        <input type="text" id="user-subject" placeholder="808s_Feedback_System" style="flex-grow: 1; border: none; outline: none; font-size: 0.85rem; padding: 2px 5px; background: transparent; color: #000;">
+                        <span style="font-size: 0.7rem; color: #a0a0a0; padding-right: 5px; font-style: italic;">[optional]</span>
                     </div>
 
-                    <!-- Area di Testo Messaggio -->
+                    <!-- Area di Testo Messaggio scritto dall'utente -->
                     <div style="margin-top: 10px;">
-                        <textarea id="message" name="message" required placeholder="Type your analog message here..." style="width: 100%; min-height: 120px; border: 1px solid #b5b2a1; padding: 10px; font-size: 0.9rem; outline: none; resize: vertical; font-family: 'Share Tech Mono', monospace; background-color: #fafafa; color: #111;"></textarea>
+                        <textarea id="user-message" required placeholder="Type your analog message here..." style="width: 100%; min-height: 120px; border: 1px solid #b5b2a1; padding: 10px; font-size: 0.9rem; outline: none; resize: vertical; font-family: 'Share Tech Mono', monospace; background-color: #fafafa; color: #111;"></textarea>
                     </div>
 
-                    <!-- Bottone per Mobile se non usano il tasto in alto -->
+                    <!-- CAMPI NASCOSTI STANDARD (Quelli che Formspree leggerà davvero, sempre compilati e sicuri al 100%) -->
+                    <input type="hidden" name="name" id="fs-static-name" value="RICCARDO_OS_USER">
+                    <input type="hidden" name="email" id="fs-static-email" value="noreply@riccardophys.github.io">
+                    <input type="hidden" name="_subject" id="fs-static-subject" value="[RICCARDO_OS] New Form Submission">
+                    <!-- Questo conterrà l'intero testo formattato -->
+                    <input type="hidden" name="message" id="fs-final-message">
+
+                    <!-- Bottone per Mobile -->
                     <div style="display: flex; justify-content: flex-end; margin-top: 5px;">
                         <button type="submit" style="background: linear-gradient(180deg, #0053e1 0%, #003db8 100%); color: white; border: 1px solid #002c9a; padding: 6px 20px; border-radius: 3px; cursor: pointer; font-size: 0.8rem; font-weight: bold;">
                             Send Message
@@ -606,6 +616,31 @@
             </div>
         </div>
 
+        <!-- SCRIPT DI TRASFORMAZIONE E IMPACCHETTAMENTO DATI -->
+        <script>
+            document.getElementById('xp-contact-form').addEventListener('submit', function(e) {
+                // Recuperiamo i dati compilati dall'utente
+                const uName = document.getElementById('user-name').value.trim() || "Anonymous";
+                const uEmail = document.getElementById('user-email').value.trim() || "Not Provided";
+                const uSubject = document.getElementById('user-subject').value.trim() || "No Subject";
+                const uMessage = document.getElementById('user-message').value;
+
+                // Creiamo il super-messaggio unificato e formattato da hacker anni 2000
+                const formattedMessage = `====================================
+[RICCARDO_OS - INCOMING TRANSMISSION]
+====================================
+SENDER:  ${uName}
+EMAIL:   ${uEmail}
+SUBJECT: ${uSubject}
+------------------------------------
+MESSAGE:
+${uMessage}
+====================================`;
+
+                // Inseriamo questo mega testo nel campo nascosto che Formspree riceverà
+                document.getElementById('fs-final-message').value = formattedMessage;
+            });
+        </script>
 
     <!-- FOOTER: RETRO SYSTEM COPYRIGHT & SPECS -->
         <footer style="grid-column: 1 / -1; margin-top: 25px; padding: 20px 10px; text-align: center; border-top: 1px dashed rgba(0, 255, 204, 0.2); font-size: 0.75rem; color: #8899a6; display: flex; flex-direction: column; gap: 8px;">
