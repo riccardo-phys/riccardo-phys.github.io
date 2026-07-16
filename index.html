@@ -429,94 +429,68 @@
         <!-- WINDOW: IPHONE 4 CALL SIMULATOR (JESSE PINKMAN VOICEMAIL) -->
         <div class="window">
             <div class="window-header">
-                <span>iPhone_4_Simulator.app</span>
+                <span>iPhone_4_Physical_Simulator.app</span>
                 <div class="window-controls">
                     <span class="win-btn btn-min"></span>
                     <span class="win-btn btn-max"></span>
                     <span class="win-btn btn-close"></span>
                 </div>
             </div>
-            <div class="window-body" style="background: #000; padding: 10px; display: flex; justify-content: center; align-items: center;">
+            <div class="window-body" style="background: #0d0e12; padding: 20px 10px; display: flex; justify-content: center; align-items: center;">
                 
-                <!-- Struttura Fisica dello Schermo dell'iPhone 4 -->
-                <div style="width: 100%; max-width: 320px; background: #1c1c1c; border-radius: 5px; border: 4px solid #444; overflow: hidden; box-shadow: inset 0 0 20px #000, 0 10px 20px rgba(0,0,0,0.5); font-family: -apple-system, Helvetica, Arial, sans-serif; position: relative;">
+                <!-- SCOCCA ESTERNA IPHONE 4 -->
+                <div style="width: 290px; height: 530px; background: #000000; border-radius: 40px; border: 4px solid #7a7a7a; box-shadow: 0 15px 35px rgba(0,0,0,0.8), inset 0 0 10px rgba(255,255,255,0.2); position: relative; display: flex; flex-direction: column; align-items: center; padding: 45px 15px; box-sizing: border-box;">
                     
-                    <!-- Barra di Stato iOS 4 (Grigia Sfocata con texture specchiata) -->
-                    <div style="background: linear-gradient(180deg, #7c7c7c 0%, #4c4c4c 50%, #1e1e1e 51%, #111111 100%); height: 20px; padding: 0 8px; display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #fff; font-weight: bold; border-bottom: 1px solid #000;">
-                        <span>AT&T 3G</span>
-                        <span>4:20 PM</span>
-                        <div style="display: flex; align-items: center; gap: 4px;">
+                    <!-- Dettagli hardware in alto (Altoparlante e Sensore) -->
+                    <div style="position: absolute; top: 22px; width: 45px; height: 6px; background: #222; border-radius: 3px; border: 1px solid #444;"></div>
+                    <div style="position: absolute; top: 12px; width: 8px; height: 8px; background: #111; border-radius: 50%;"></div>
+
+                    <!-- SCHERMO DEL TELEFONO -->
+                    <div style="width: 100%; height: 370px; background: #000; border: 3px solid #111; border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; position: relative; font-family: -apple-system, Helvetica, Arial, sans-serif; box-sizing: border-box;">
+                        
+                        <!-- Barra di Stato iOS 4 -->
+                        <div style="background: linear-gradient(180deg, #7c7c7c 0%, #4c4c4c 50%, #1e1e1e 51%, #111111 100%); height: 20px; padding: 0 8px; display: flex; justify-content: space-between; align-items: center; font-size: 10px; color: #fff; font-weight: bold; border-bottom: 1px solid #000; box-sizing: border-box; width: 100%;">
+                            <span>AT&T 3G</span>
+                            <span>4:20 PM</span>
                             <span>🔋 100%</span>
                         </div>
-                    </div>
 
-                    <!-- Schermata di Chiamata con Sfondo Gocce d'Acqua (CSS Canvas-Gradient Nostalgico) -->
-                    <div style="background: radial-gradient(circle, #3e5e7a 0%, #112233 100%); background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), radial-gradient(rgba(255,255,255,0.1) 1.5px, transparent 1.5px); background-size: 20px 20px, 30px 30px; padding: 25px 15px 15px 15px; text-align: center; color: #fff; position: relative;">
-                        
-                        <!-- ID Chiamante -->
-                        <h2 style="font-size: 24px; font-weight: normal; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">Jesse Pinkman</h2>
-                        <div id="call-status" style="font-size: 14px; color: #d1e2f2; font-weight: 300; margin-bottom: 30px; text-shadow: 0 1px 3px rgba(0,0,0,0.6);">calling...</div>
-
-                        <!-- Griglia dei 6 Pulsanti Classici iOS 4 -->
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px 10px; margin-bottom: 40px; padding: 0 10px;">
-                            <!-- MUTE (Funziona come PLAY/PAUSE) -->
-                            <div onclick="toggleJesseAudio()" style="cursor: pointer; display: flex; flex-direction: column; align-items: center;">
-                                <div id="ios-mute-btn" style="width: 54px; height: 54px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.35); background: linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.02) 100%); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; box-shadow: inset 0 1px 3px rgba(255,255,255,0.2), 0 3px 6px rgba(0,0,0,0.4); transition: background 0.2s;">
-                                    🎤
-                                </div>
-                                <span style="font-size: 11px; margin-top: 6px; color: #e2e8f0;">mute</span>
+                        <!-- Schermata di Chiamata (Sfondo gocce d'acqua) -->
+                        <div style="flex-grow: 1; background: radial-gradient(circle, #3e5e7a 0%, #112233 100%); background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), radial-gradient(rgba(255,255,255,0.1) 1.5px, transparent 1.5px); background-size: 20px 20px, 30px 30px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; padding: 25px 15px; box-sizing: border-box;">
+                            
+                            <!-- Area Testo Contatto -->
+                            <div style="text-align: center;">
+                                <h2 style="font-size: 22px; font-weight: normal; margin-bottom: 4px; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">Jesse Pinkman</h2>
+                                <div id="call-status" style="font-size: 13px; color: #d1e2f2; font-weight: 300; text-shadow: 0 1px 3px rgba(0,0,0,0.6);">calling...</div>
                             </div>
 
-                            <!-- KEYPAD -->
-                            <div style="opacity: 0.5; display: flex; flex-direction: column; align-items: center;">
-                                <div style="width: 54px; height: 54px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
-                                    ⌨
-                                </div>
-                                <span style="font-size: 11px; margin-top: 6px; color: #a0aec0;">keypad</span>
+                            <!-- ELEMENTO AUDIO INVISIBILE -->
+                            <audio id="jesse-audio" src="jesse.mp3" preload="auto"></audio>
+
+                            <!-- CONTAINER DEI DUE PULSANTI (START & END CALL) -->
+                            <div style="width: 100%; display: flex; flex-direction: column; gap: 12px; align-items: center; margin-bottom: 10px;">
+                                
+                                <!-- PULSANTE VERDE: START CALL (PLAY) -->
+                                <button onclick="toggleJesseAudio()" id="jesse-play-btn" style="width: 90%; padding: 12px 0; border-radius: 8px; border: 1px solid #145c14; background: linear-gradient(180deg, #4ed04e 0%, #109010 50%, #006000 51%, #0b700b 100%); color: #fff; font-size: 15px; font-weight: bold; font-family: Helvetica, sans-serif; cursor: pointer; text-shadow: 0 -1px 1px rgba(0,0,0,0.6); box-shadow: 0 4px 8px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.45); transition: filter 0.1s; letter-spacing: 0.5px;">
+                                    Start Call
+                                </button>
+
+                                <!-- PULSANTE ROSSO: END CALL (STOP) -->
+                                <button onclick="stopJesseAudio()" style="width: 90%; padding: 12px 0; border-radius: 8px; border: 1px solid #580c0c; background: linear-gradient(180deg, #e04040 0%, #b01010 50%, #800000 51%, #a00000 100%); color: #fff; font-size: 15px; font-weight: bold; font-family: Helvetica, sans-serif; cursor: pointer; text-shadow: 0 -1px 1px rgba(0,0,0,0.6); box-shadow: 0 4px 8px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.45); transition: filter 0.1s; letter-spacing: 0.5px;">
+                                    End Call
+                                </button>
+                                
                             </div>
 
-                            <!-- SPEAKER -->
-                            <div style="opacity: 0.5; display: flex; flex-direction: column; align-items: center;">
-                                <div style="width: 54px; height: 54px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
-                                    🔊
-                                </div>
-                                <span style="font-size: 11px; margin-top: 6px; color: #a0aec0;">speaker</span>
-                            </div>
-
-                            <!-- ADD CALL -->
-                            <div style="opacity: 0.5; display: flex; flex-direction: column; align-items: center;">
-                                <div style="width: 54px; height: 54px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
-                                    ➕
-                                </div>
-                                <span style="font-size: 11px; margin-top: 6px; color: #a0aec0;">add call</span>
-                            </div>
-
-                            <!-- FACETIME -->
-                            <div style="opacity: 0.5; display: flex; flex-direction: column; align-items: center;">
-                                <div style="width: 54px; height: 54px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
-                                    📹
-                                </div>
-                                <span style="font-size: 11px; margin-top: 6px; color: #a0aec0;">FaceTime</span>
-                            </div>
-
-                            <!-- CONTACTS -->
-                            <div style="opacity: 0.5; display: flex; flex-direction: column; align-items: center;">
-                                <div style="width: 54px; height: 54px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.2); display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
-                                    👤
-                                </div>
-                                <span style="font-size: 11px; margin-top: 6px; color: #a0aec0;">contacts</span>
-                            </div>
                         </div>
-
-                        <!-- Elemento Audio Invisibile -->
-                        <audio id="jesse-audio" src="jesse.mp3" preload="auto"></audio>
-
-                        <!-- Pulsantone Rosso Lucido "End Call" in stile Sfumato 3D/Skeuomorfico -->
-                        <button onclick="stopJesseAudio()" style="width: 80%; max-width: 240px; padding: 12px 0; border-radius: 8px; border: 1px solid #580c0c; background: linear-gradient(180deg, #e04040 0%, #b01010 50%, #800000 51%, #a00000 100%); color: #fff; font-size: 16px; font-weight: bold; font-family: Helvetica, sans-serif; cursor: pointer; text-shadow: 0 -1px 1px rgba(0,0,0,0.6); box-shadow: 0 4px 10px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.45); transition: filter 0.1s; letter-spacing: 0.5px;">
-                            End Call
-                        </button>
-
                     </div>
+
+                    <!-- TASTO HOME FISICO DELL'IPHONE 4 -->
+                    <div style="position: absolute; bottom: 10px; width: 42px; height: 42px; background: #111; border-radius: 50%; border: 2px solid #2d2d2d; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 2px 5px rgba(0,0,0,0.8);">
+                        <!-- Il quadratino classico stampato sul tasto Home di iOS -->
+                        <div style="width: 12px; height: 12px; border: 1.5px solid #666; border-radius: 3px;"></div>
+                    </div>
+
                 </div>
 
             </div>
@@ -777,19 +751,21 @@ ${uMessage}
         </footer>
 
 
-    <!-- LOGICA IPHONE 4 SIMULATOR -->
+   <!-- LOGICA IPHONE 4 SIMULATOR -->
     <script>
         const jesseAudio = document.getElementById('jesse-audio');
         const callStatus = document.getElementById('call-status');
-        const muteBtnIcon = document.getElementById('ios-mute-btn');
+        const jessePlayBtn = document.getElementById('jesse-play-btn');
 
         function toggleJesseAudio() {
             if (jesseAudio.paused) {
                 jesseAudio.play()
                     .then(() => {
-                        callStatus.textContent = "00:01"; // Avvia il timer di chiamata
-                        muteBtnIcon.style.background = "rgba(255, 255, 255, 0.4)"; // Evidenzia il pulsante
-                        muteBtnIcon.style.borderColor = "#00ffcc";
+                        callStatus.textContent = "00:01";
+                        jessePlayBtn.textContent = "Pause Call";
+                        // Cambia lo stile del pulsante in arancione/giallo "Hold" durante la pausa
+                        jessePlayBtn.style.background = "linear-gradient(180deg, #4ed04e 0%, #109010 50%, #006000 51%, #0b700b 100%)";
+                        jessePlayBtn.style.borderColor = "#145c14";
                     })
                     .catch(err => {
                         console.log("Errore audio Jesse:", err);
@@ -798,8 +774,10 @@ ${uMessage}
             } else {
                 jesseAudio.pause();
                 callStatus.textContent = "call on hold";
-                muteBtnIcon.style.background = "linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.02) 100%)";
-                muteBtnIcon.style.borderColor = "rgba(255,255,255,0.35)";
+                jessePlayBtn.textContent = "Resume Call";
+                // Coloriamo di arancione/giallo quando la chiamata è "in attesa"
+                jessePlayBtn.style.background = "linear-gradient(180deg, #f2a134 0%, #d67a10 50%, #9e5100 51%, #b86200 100%)";
+                jessePlayBtn.style.borderColor = "#6e3a00";
             }
         }
 
@@ -807,10 +785,10 @@ ${uMessage}
             jesseAudio.pause();
             jesseAudio.currentTime = 0;
             callStatus.textContent = "call ended";
-            muteBtnIcon.style.background = "linear-gradient(180deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.02) 100%)";
-            muteBtnIcon.style.borderColor = "rgba(255,255,255,0.35)";
+            jessePlayBtn.textContent = "Start Call";
+            jessePlayBtn.style.background = "linear-gradient(180deg, #4ed04e 0%, #109010 50%, #006000 51%, #0b700b 100%)";
+            jessePlayBtn.style.borderColor = "#145c14";
             
-            // Dopo 2 secondi, resetta la scritta in "calling..."
             setTimeout(() => {
                 if (jesseAudio.paused && jesseAudio.currentTime === 0) {
                     callStatus.textContent = "calling...";
@@ -818,7 +796,7 @@ ${uMessage}
             }, 2000);
         }
 
-        // Timer di chiamata dinamico (aggiorna i secondi mentre Jesse parla)
+        // Timer di chiamata dinamico
         jesseAudio.addEventListener('timeupdate', () => {
             if (!jesseAudio.paused) {
                 const minutes = Math.floor(jesseAudio.currentTime / 60).toString().padStart(2, '0');
@@ -827,7 +805,7 @@ ${uMessage}
             }
         });
 
-        // Quando la segreteria telefonica finisce, riaggancia automaticamente
+        // Quando finisce la segreteria, riaggancia
         jesseAudio.addEventListener('ended', () => {
             stopJesseAudio();
         });
