@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>808s // SYSTEM_v1.0</title>
+    <style>
+        /* Sfondi e Font Retro-Futuristi */
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Share Tech Mono', monospace;
+            image-rendering: pixelated;
+        }
+
+        body {
+            background-color: #0c0d12;
+            background-image: 
+                radial-gradient(circle, rgba(138, 43, 226, 0.15) 0%, transparent 70%),
+                linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background-size: 100% 100%, 100% 4px, 6px 100%;
+            color: #00ffcc;
+            overflow-x: hidden;
+            padding: 10px; /* Ridotto per schermi piccoli */
+            min-height: 100vh;
+        }
+
+        /* Scanline Effect (Anni 2000 CRT) */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 9999;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        /* Griglia Desktop Responsive */
+        .desktop {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding-bottom: 30px;
+        }
+
+        /* HEADER STILE PSP (Cross Media Bar) */
+        header {
+            grid-column: 1 / -1;
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid #334455;
+            border-radius: 8px;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: inset 0 0 10px rgba(0,255,204,0.1);
+            margin-bottom: 10px;
+        }
+
+        .psp-logo {
+            font-weight: bold; 
+            color: #ff3366;
+            font-size: 0.95rem;
+        }
+
+        .psp-menu {
+            display: flex;
+            gap: 15px;
+            list-style: none;
+        }
+
+        .psp-item {
+            color: #8899a6;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .psp-item.active, .psp-item:hover {
+            color: #ff3366;
+            text-shadow: 0 0 8px #ff3366;
+        }
+
+        #clock {
+            font-size: 0.8rem;
+            color: #8899a6;
+        }
+
+        /* FINESTRE STILE WINDOWS MEDIA PLAYER / WINAMP */
+        .window {
+            background: linear-gradient(180deg, #1e222b 0%, #111318 100%);
+            border: 3px solid #3d4659;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.7), inset 0 1px 0 rgba(255,255,255,0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        /* Barra del Titolo Metallica */
+        .window-header {
+            background: linear-gradient(90deg, #2b303c 0%, #48536a 100%);
+            padding: 8px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #1a1d24;
+            font-weight: bold;
+            font-size: 0.8rem;
+            color: #e2e8f0;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 5px;
+        }
+
+        .win-btn {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: 1px solid rgba(0,0,0,0.5);
+            cursor: pointer;
+        }
+        .btn-close { background: #ff5f56; }
+        .btn-min { background: #ffbd2e; }
+        .btn-max { background: #27c93f; }
+
+        .window-body {
+            padding: 12px;
+            flex-grow: 1;
+        }
+
+        /* PLAYER MP3 STILE ANNI 2000 */
+        .mp3-player {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #15181f;
+            border-radius: 8px;
+            padding: 12px;
+            border: 1px solid #2d3345;
+        }
+
+        .lcd-screen {
+            background-color: #0d1e1c;
+            border: 2px solid #1a2f2b;
+            border-radius: 4px;
+            width: 100%;
+            padding: 10px;
+            color: #00ff66;
+            font-size: 0.75rem;
+            margin-bottom: 12px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.9);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lcd-screen::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(transparent 50%, rgba(0,0,0,0.3) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+
+        .track-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        /* GIF del battito cardiaco dentro l'LCD */
+        .heart-wave {
+            width: 100%;
+            height: 50px;
+            object-fit: cover;
+            border: 1px solid #1a2f2b;
+            margin-top: 5px;
+            filter: hue-rotate(60deg) saturate(1.5);
+        }
+
+        .mp3-controls {
+            display: flex;
+            gap: 12px;
+            margin-top: 5px;
+        }
+
+        .mp3-btn {
+            background: linear-gradient(180deg, #3d4659 0%, #222733 100%);
+            border: 2px solid #4f5b74;
+            color: #a0aec0;
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .mp3-btn:active {
+            background: #111318;
+            border-color: #ff3366;
+            color: #ff3366;
+            transform: translateY(1px);
+        }
+
+        /* GALLERIA IMMAGINI STYLE PORTFOLIO Y2K */
+        .image-container {
+            border: 1px solid #334455;
+            background: #000;
+            padding: 4px;
+            border-radius: 6px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .y2k-img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9; /* Mantiene le proporzioni corrette senza tagliare */
+            object-fit: cover;
+            display: block;
+            border-radius: 4px;
+            transition: filter 0.3s;
+        }
+
+        /* Fix per la seconda immagine che è verticale/quadrata */
+        .heart-img {
+            aspect-ratio: 1 / 1;
+        }
+
+        .y2k-img:hover {
+            filter: contrast(1.2) brightness(1.1) saturate(1.3);
+        }
+
+        .caption {
+            font-size: 0.7rem;
+            color: #8899a6;
+            margin-top: 5px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        /* FILE SYSTEM NERD PANEL */
+        .sys-log {
+            font-size: 0.75rem;
+            color: #9f7aea;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .sys-line {
+            border-bottom: 1px dashed rgba(159, 122, 234, 0.2);
+            padding: 3px 0;
+            word-break: break-all; /* Evita che scritte lunghe rompano il layout su mobile */
+        }
+
+        .glow-text {
+            color: #ff3366;
+            text-shadow: 0 0 8px rgba(255, 51, 102, 0.6);
+        }
+
+        /* MEDIA QUERIES PER ADATTAMENTO MOBILE (IPHONE/SMARTPHONE) */
+        @media (max-width: 768px) {
+            body {
+                padding: 8px;
+            }
+
+            .desktop {
+                grid-template-columns: 1fr; /* Una sola colonna per schermi piccoli */
+                gap: 12px;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+                padding: 10px;
+            }
+
+            .psp-menu {
+                justify-content: center;
+                width: 100%;
+            }
+
+            .psp-item {
+                font-size: 0.75rem;
+            }
+
+            #clock {
+                display: none; /* Nascondiamo l'orologio su mobile per pulire l'interfaccia */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="desktop">
+
+        <!-- HEADER (PSP XMB VIBES) -->
+        <header>
+            <div class="psp-logo">[ 808s_NET_v1.0 ]</div>
+            <ul class="psp-menu">
+                <li class="psp-item active">□ SYSTEM</li>
+                <li class="psp-item">△ AUDIO</li>
+                <li class="psp-item">○ FILES</li>
+                <li class="psp-item">☓ EXIT</li>
+            </ul>
+            <div id="clock">12:00:00</div>
+        </header>
+
+        <!-- WINDOW 1: IL LETTORE MP3 / MEDIA PLAYER -->
+        <div class="window">
+            <div class="window-header">
+                <span>808s_MEDIA_PLAYER.exe</span>
+                <div class="window-controls">
+                    <span class="win-btn btn-min"></span>
+                    <span class="win-btn btn-max"></span>
+                    <span class="win-btn btn-close"></span>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="mp3-player">
+                    <div class="lcd-screen">
+                        <div class="track-info">
+                            <span>TRACK: 04_HEARTLESS.wav</span>
+                            <span>96 kbps</span>
+                        </div>
+                        <div class="track-info">
+                            <span class="glow-text">PLAYING >> SYNCING_HEART</span>
+                            <span>[02:14 / 03:31]</span>
+                        </div>
+                        <img src="https://c.tenor.com/p2w1siLrDksAAAAC/tenor.gif" class="heart-wave" alt="Heart Waveform">
+                    </div>
+                    
+                    <div class="mp3-controls">
+                        <button class="mp3-btn" onclick="alert('REPLAY ACTIVE')">■</button>
+                        <button class="mp3-btn" onclick="alert('SYNCHRONIZING AUDIO DRIVERS')">▶</button>
+                        <button class="mp3-btn" onclick="alert('MUTE')">||</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WINDOW 2: FILE SYSTEM & CONSOLE LOG -->
+        <div class="window">
+            <div class="window-header">
+                <span>sys_terminal_log.log</span>
+                <div class="window-controls">
+                    <span class="win-btn btn-min"></span>
+                    <span class="win-btn btn-max"></span>
+                    <span class="win-btn btn-close"></span>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="sys-log">
+                    <div class="sys-line">>> INITIALIZING 808s CORE... <span style="color: #00ff66;">[OK]</span></div>
+                    <div class="sys-line">>> CHECKING EMOTIONAL_DRIVER... <span style="color: #00ff66;">[CONNECTED]</span></div>
+                    <div class="sys-line">>> ROLAND_TR-808_PITCH: <span class="glow-text">LOW_FREQ</span></div>
+                    <div class="sys-line">>> WARNING: OVERHEATING HEART_CHIP_1984</div>
+                    <div class="sys-line">>> DEPLOYED_VIA_GITHUB_PAGES: <span style="color: #00ff66;">TRUE</span></div>
+                    <div class="sys-line" style="font-size: 0.7rem; color: #718096; margin-top: 5px;">
+                        "Welcome to the retro isolation chamber."
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WINDOW 3: IMAGE VIEWER 1 (Kanye Studio) -->
+        <div class="window">
+            <div class="window-header">
+                <span>ye_studio_archive_01.jpg</span>
+                <div class="window-controls">
+                    <span class="win-btn btn-min"></span>
+                    <span class="win-btn btn-max"></span>
+                    <span class="win-btn btn-close"></span>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="image-container">
+                    <img src="https://media.gqitalia.it/photos/620fd27346c2fb273bb06acb/16:9/w_2560%2Cc_limit/jeen_yuhs_a_Kanye_Trilogy_01.24.30.21_R.png" class="y2k-img" alt="Kanye Trilogy">
+                    <div class="caption">ID: JEEN_YUHS_TRILOGY // YEAR: 2000s</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WINDOW 4: IMAGE VIEWER 2 (808s Heart) -->
+        <div class="window">
+            <div class="window-header">
+                <span>broken_heart_aesthetic.png</span>
+                <div class="window-controls">
+                    <span class="win-btn btn-min"></span>
+                    <span class="win-btn btn-max"></span>
+                    <span class="win-btn btn-close"></span>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="image-container">
+                    <img src="https://i.pinimg.com/1200x/41/ae/98/41ae98537372146d25c605cc5f61e01e.jpg" class="y2k-img heart-img" alt="Heart Aesthetic">
+                    <div class="caption">ID: HEART_CORE_DS // STATUS: DEFUSED</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Orologio Funzionante -->
+    <script>
+        function updateClock() {
+            const clockEl = document.getElementById('clock');
+            if (clockEl && window.innerWidth > 768) {
+                const now = new Date();
+                let hours = now.getHours().toString().padStart(2, '0');
+                let minutes = now.getMinutes().toString().padStart(2, '0');
+                let seconds = now.getSeconds().toString().padStart(2, '0');
+                clockEl.textContent = `${hours}:${minutes}:${seconds}`;
+            }
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+</body>
+</html>
