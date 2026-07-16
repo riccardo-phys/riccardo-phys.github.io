@@ -491,25 +491,51 @@
             </div>
         </div>
 
-       <!-- WINDOW 5: LA TUA FOTO PERSONALE DEL 2004 (Ora pulita e isolata) -->
-        <div class="window">
+       <!-- WINDOW 5: CARTELLA DI RECOVERY MULTIMEDIALE (FOTO PERSONALI) -->
+        <div class="window" style="grid-column: 1 / -1;">
             <div class="window-header">
-                <span>riccardo_archive_2004.dat</span>
+                <span>D:\Backup\Riccardo_Archive_Photos\</span>
                 <div class="window-controls">
                     <span class="win-btn btn-min"></span>
                     <span class="win-btn btn-max"></span>
                     <span class="win-btn btn-close"></span>
                 </div>
             </div>
-            <div class="window-body">
-                <div class="image-container">
-                    <!-- Puntiamo direttamente al file caricato su GitHub per evitare i blocchi di Google Drive -->
-                    <img src="riccardo_2004.jpg" class="y2k-img" style="max-height: 250px; object-fit: contain;" alt="Riccardo 2004 Snapshot" onerror="this.style.display='none'; alert('Carica la tua foto riccardo_2004.jpg nella repository GitHub per vederla qui!');">
-                    <div class="caption">
-                        <strong>DATA_RECOVERY_STATUS:</strong> 100% RECOVERED // <strong>HARDWARE:</strong> RETRO_CHIP_2004
-                        <p style="margin-top: 5px; font-size: 0.75rem; color: #ff3366;">[!] Analogic Memory: successfully archiviated.</p>
-                    </div>
+            <div class="window-body" style="background: #11141a;">
+                
+                <!-- Sottotitolo stile Explorer -->
+                <div style="font-size: 0.75rem; color: #a0aec0; border-bottom: 1px solid #232a37; padding-bottom: 8px; margin-bottom: 15px; text-transform: uppercase;">
+                    📂 Directory: 2 Files Found // System Recovery: 100%
                 </div>
+
+                <!-- Griglia interna per affiancare le due foto -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px;">
+                    
+                    <!-- FOTO 1: RICCARDO 2004 (Formato 1:1 Quadrato) -->
+                    <div class="image-container" style="background: #000; border: 1px solid #2d3748; padding: 6px;">
+                        <img src="riccardo_2004.jpg" class="y2k-img heart-img" style="width: 100%; height: auto; aspect-ratio: 1 / 1; object-fit: cover;" alt="Riccardo 2004" onerror="this.style.display='none';">
+                        <div class="caption" style="margin-top: 8px;">
+                            <strong>riccardo_2004.jpg</strong>
+                            <p style="font-size: 0.65rem; color: #ff3366; margin-top: 2px;">[Format: 1:1] // Year: 2004</p>
+                        </div>
+                    </div>
+
+                    <!-- FOTO 2: R1 (Formato 16:9 Widescreen) -->
+                    <div class="image-container" style="background: #000; border: 1px solid #2d3748; padding: 6px;">
+                        <img src="r1.jpg" class="y2k-img" style="width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover;" alt="Riccardo r1" onerror="this.style.display='none';">
+                        <div class="caption" style="margin-top: 8px;">
+                            <strong>r1.jpg</strong>
+                            <p style="font-size: 0.65rem; color: #00ffcc; margin-top: 2px;">[Format: 16:9] // Tech_Snapshot</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Nota informativa finale di sistema -->
+                <div style="margin-top: 15px; font-size: 0.7rem; color: #718096; text-align: center; border-top: 1px dashed rgba(255, 51, 102, 0.2); padding-top: 10px;">
+                    [!] Analog memories mounted successfully. Files are locked in the database.
+                </div>
+
             </div>
         </div>
 
