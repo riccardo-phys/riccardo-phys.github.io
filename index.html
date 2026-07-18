@@ -1043,6 +1043,14 @@
             }
         }
 
+        // ASSEGNAZIONE DELLE FUNZIONI AI BOTTONI E AL TASTO INVIO (REINSERITI QUI SOTTO)
+        document.getElementById('crypto-btn').addEventListener('click', checkCryptoKey);
+        document.getElementById('crypto-key').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                checkCryptoKey();
+            }
+        });
+
         // FORM SUBMISSION ENGINE
         const contactForm = document.getElementById('xp-contact-form');
         const alertBox = document.getElementById('xp-alert-box');
