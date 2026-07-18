@@ -902,7 +902,7 @@
             ">> STORAGE_DEVICE: PSP_MEMORY_STICK_16GB",
             ">> AUDIO_ENGINE: Roland TR-808 Emulator Active",
             ">> DEPLOYMENT_HOST: github.io/",
-            ">> INITIALIZATION COMPLETING... \"2000s hardware simulation. Just evening the odds.\""
+            ">> INITIALIZATION COMPLETING... \"2000s hardware simulation.\""
         ];
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -914,7 +914,6 @@
                     const line = document.createElement('div');
                     line.className = 'boot-log';
                     
-                    // Style personalizzato in base al tipo di output
                     if(index === 0) line.innerHTML = `>> ACCESS GRANTED TO: <span style="color: #00ffcc; text-shadow: 0 0 5px #00ffcc;">USER_RICCARDO</span>`;
                     else if(index === 1) line.innerHTML = `>> SYSTEM: <span style="color: #107c10;">XBOX_360_KERNEL_v2.0.1888.0</span>`;
                     else if(index === 2) line.innerHTML = `>> STORAGE_DEVICE: <span style="color: #00ff66;">PSP_MEMORY_STICK_16GB</span>`;
@@ -922,15 +921,16 @@
                     
                     container.appendChild(line);
                     index++;
-                    setTimeout(printNextLine, 350); // Delay tra le righe log
+                    // Modificato da 350ms a 100ms per stampare le righe molto più velocemente
+                    setTimeout(printNextLine, 100); 
                 } else {
-                    // Nasconde la console di boot svanendo dopo il caricamento
+                    // Modificato da 1000ms a 300ms: la schermata inizia a sparire quasi subito dopo l'ultimo log
                     setTimeout(() => {
                         container.style.opacity = '0';
                         setTimeout(() => {
                             container.style.visibility = 'hidden';
-                        }, 500);
-                    }, 1000);
+                        }, 400); // Tempo di dissolvenza leggermente più reattivo
+                    }, 300);
                 }
             }
             printNextLine();
