@@ -688,7 +688,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="iphone-home-button"><div style="width: 12px; height: 12px; border: 1.5px solid #666; border-radius: 3px;"></div></div>
+                   <!-- Cliccando sul tasto Home fisico parte l'indovinello per la lettera M -->
+<div onclick="showEasterEggM()" class="iphone-home-button" style="cursor: pointer;"><div style="width: 12px; height: 12px; border: 1.5px solid #666; border-radius: 3px;"></div></div>
                 </div>
             </div>
         </div>
@@ -972,12 +973,19 @@
         glitchTarget.addEventListener('click', triggerGlitch);
 
 
-        // EASTER EGG PULSANTE MENU IPOD
+        // EASTER EGGS
         function showEasterEggA() {
     alert(
         "== ⍰ ==\n\n" +
         "Solve for 'x':\n\n" +
         "x = ⌊ ∫ e^(-t²) dt ⌋ from -∞ to +∞\n\n"
+    );
+}
+
+        function showEasterEggM() {
+    alert(
+        "== ⍰ ==\n\n" +
+        "Who's calling? His name is long, but not enough. Add 1.\n\n" +
     );
 }
 
