@@ -1051,11 +1051,14 @@
             }
         });
 
-        // FORM SUBMISSION ENGINE
+        // FORM SUBMISSION ENGINE via Cloudflare Workers Secure Bridge
         const contactForm = document.getElementById('xp-contact-form');
         const alertBox = document.getElementById('xp-alert-box');
         const sendBtnText = document.getElementById('send-btn-text');
         const mobileSendBtn = document.getElementById('mobile-send-btn');
+
+        // INSERISCI QUI L'URL DEL TUO WORKER CLOUDFLARE
+        const CLOUDFLARE_WORKER_URL = "https://IL_TUO_WORKER_QUI.workers.dev";
 
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1072,8 +1075,8 @@
 [RICCARDO_OS - INCOMING TRANSMISSION]
 ====================================
 SENDER:   ${uName}
-EMAIL:     ${uEmail}
-SUBJECT: ${uSubject}
+EMAIL:    ${uEmail}
+SUBJECT:  ${uSubject}
 ------------------------------------
 MESSAGE:
 ${uMessage}
@@ -1083,24 +1086,23 @@ ${uMessage}
 ====================================
 TIMESTAMP:   ${new Date().toLocaleString()}
 TIMEZONE:    ${Intl.DateTimeFormat().resolvedOptions().timeZone}
-OS/BROWSER:  ${navigator.userAgent}
+OS/BROWSER:  ${navigator.userAgent.substring(0, 60)}...
 SCREEN_RES:  ${window.screen.width}x${window.screen.height}
 LANG:        ${navigator.language || navigator.userLanguage}
 ====================================`;
 
-            document.getElementById('fs-final-message').value = formattedMessage;
-
-            fetch(contactForm.action, {
+            // Spediamo una richiesta POST in JSON al Worker Cloudflare
+            fetch(CLOUDFLARE_WORKER_URL, {
                 method: 'POST',
-                body: new FormData(contactForm),
-                headers: { 'Accept': 'application/json' }
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: formattedMessage })
             })
             .then(response => {
                 if (response.ok) {
                     alertBox.style.display = 'block';
                     contactForm.reset();
                 } else {
-                    alert("System Error: Could not deliver message.");
+                    alert("System Error: Could not deliver message via Worker Bridge.");
                 }
             })
             .catch(error => {
