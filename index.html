@@ -633,7 +633,6 @@
                         </div>
                         <div class="ios-call-screen">
                             <div style="text-align: center;">
-                                <!-- CORREZIONE 2: Cambiato in "No caller ID" -->
                                 <h2 style="font-size: 22px; font-weight: normal; margin-bottom: 4px; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">No caller ID</h2>
                                 <div id="call-status" style="font-size: 13px; color: #d1e2f2; font-weight: 300; text-shadow: 0 1px 3px rgba(0,0,0,0.6);">calling...</div>
                             </div>
@@ -691,7 +690,7 @@
             </div>
         </div>
 
-       <!-- WINDOW 5: ROTATED PORTRAIT -->
+        <!-- WINDOW 5: ROTATED PORTRAIT -->
         <div class="window">
             <div class="window-header">
                 <span>rotated_polaroid.png</span>
@@ -702,7 +701,6 @@
                 </div>
             </div>
             <div class="window-body" style="padding: 12px;">
-                <!-- Il container ora ha lo stesso identico aspect-ratio 16/9 della scheda Yeezy -->
                 <div class="image-container" style="width: 100%; aspect-ratio: 16 / 9; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #000; position: relative;">
                     <img src="https://i.pinimg.com/736x/55/f6/fc/55f6fcc542e0299eb9c7ccd2f1e09c06.jpg" 
                          style="position: absolute; width: 56.25%; height: 177.77%; object-fit: cover; transform: rotate(-90deg); border-radius: 4px; flex-shrink: 0;" 
@@ -769,7 +767,6 @@
                     <div id="crypto-lock-screen" class="crypto-overlay">
                         <div class="crypto-title">[!] CRITICAL ALERT: DATA ENCRYPTED [!]</div>
                         
-                        <!-- CORREZIONE 4: Aggiunto l'indizio sui ricordi in inglese -->
                         <p style="font-size: 0.8rem; color: #00ffcc; font-weight: bold; letter-spacing: 1px; margin-bottom: 5px;">
                             [CONTENT INDICATOR: ANALOG MEMORIES ARCHIVE]
                         </p>
@@ -894,7 +891,7 @@
         glitchTarget.addEventListener('click', triggerGlitch);
 
 
-       // SECURE RETRO CRYPTO DECRYPTION SYSTEM WITH MATRIX DECODE EFFECT
+        // SECURE RETRO CRYPTO DECRYPTION SYSTEM WITH MATRIX DECODE EFFECT
         async function checkCryptoKey() {
             let keyInput = document.getElementById('crypto-key').value;
             const errorMsg = document.getElementById('crypto-error');
@@ -980,18 +977,25 @@
                                     </div>
                                 </div>
                             `;
-                        }, 1200); // 1.2 secondi di attesa sul prompt verde prima dello sblocco definitivo
+                        }, 1200);
                     }
                     
-                    // Incremento frazionato per rallentare leggermente la stabilizzazione di ogni carattere
                     iterations += 1 / 3; 
-                }, 40); // Velocità di aggiornamento dei caratteri (in millisecondi)
+                }, 40);
 
             } else {
                 errorMsg.style.display = 'block';
                 document.getElementById('crypto-key').value = '';
             }
         }
+
+        // AGGIUNTA EVENTI E LISTENERS (Mancavano nel codice precedente!)
+        document.getElementById('crypto-btn').addEventListener('click', checkCryptoKey);
+        document.getElementById('crypto-key').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                checkCryptoKey();
+            }
+        });
 
 
         // FORM SUBMISSION ENGINE
@@ -1015,7 +1019,7 @@
 [RICCARDO_OS - INCOMING TRANSMISSION]
 ====================================
 SENDER:   ${uName}
-EMAIL:    ${uEmail}
+EMAIL:     ${uEmail}
 SUBJECT: ${uSubject}
 ------------------------------------
 MESSAGE:
