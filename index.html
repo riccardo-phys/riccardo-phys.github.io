@@ -105,14 +105,14 @@
             left: 2px;
             text-shadow: -2px 0 #ff00c8;
             clip: rect(44px, 450px, 56px, 0);
-            animation: glitch-anim-2 0.3s infinite linear alternate-reverse;
+            animation: glitch-anim 0.3s infinite linear alternate-reverse;
         }
 
         .psp-logo.glitch-active::after {
             left: -2px;
             text-shadow: -2px 0 #00ffff;
             clip: rect(85px, 450px, 140px, 0);
-            animation: glitch-anim-2 0.2s infinite linear alternate-reverse;
+            animation: glitch-anim 0.2s infinite linear alternate-reverse;
         }
 
         @keyframes glitch-anim {
@@ -740,15 +740,15 @@
                         This partition contains analog hardware snapshots registered by USER_RICCARDO. Enter security authentication bypass key to mount image files.
                     </p>
                     <div class="crypto-input-wrapper">
-                        <input type="password" id="crypto-key" placeholder="ENTER ACCESS KEY" class="crypto-field" onkeydown="if(event.key === 'Enter') checkCryptoKey()">
-                        <button onclick="checkCryptoKey()" class="crypto-btn">Decrypt</button>
+                        <input type="password" id="crypto-key" placeholder="ENTER ACCESS KEY" class="crypto-field">
+                        <button id="crypto-btn" class="crypto-btn">Decrypt</button>
                     </div>
                     <div id="crypto-error" style="font-size: 0.7rem; color: var(--neon-pink); display: none; text-transform: uppercase; margin-top: 5px;">
                         [-] ACCESS DENIED: INVALID KEY STRING
                     </div>
                 </div>
 
-                <!-- LA GRIGLIA REALE (Contiene solo immagini fittizie e sfocate inizialmente) -->
+                <!-- LA GRIGLIA REALE -->
                 <div class="explorer-grid" id="secure-photo-grid">
                     <div class="image-container" style="padding: 6px;">
                         <div class="y2k-img heart-img blurred-placeholder" style="background: #22050c; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: var(--neon-pink);">ENCRYPTED_DATA_LOCK</div>
@@ -857,8 +857,6 @@
         function triggerGlitch() {
             clearTimeout(glitchTimeout);
             glitchTarget.classList.add('glitch-active');
-            
-            // Il glitch si ferma automaticamente dopo 400ms
             glitchTimeout = setTimeout(() => {
                 glitchTarget.classList.remove('glitch-active');
             }, 400);
@@ -868,58 +866,65 @@
         glitchTarget.addEventListener('click', triggerGlitch);
 
 
-       // SECURE RETRO CRYPTO DECRYPTION SYSTEM (Anti-Inspect, Case-Insensitive & Hash Protection)
-async function checkCryptoKey() {
-    let keyInput = document.getElementById('crypto-key').value;
-    const errorMsg = document.getElementById('crypto-error');
-    const statusLabel = document.getElementById('crypto-status');
-    const lockScreen = document.getElementById('crypto-lock-screen');
-    const gridContainer = document.getElementById('secure-photo-grid');
+        // SECURE RETRO CRYPTO DECRYPTION SYSTEM (Listener nativi stabili)
+        async function checkCryptoKey() {
+            let keyInput = document.getElementById('crypto-key').value;
+            const errorMsg = document.getElementById('crypto-error');
+            const statusLabel = document.getElementById('crypto-status');
+            const lockScreen = document.getElementById('crypto-lock-screen');
+            const gridContainer = document.getElementById('secure-photo-grid');
 
-    // Forza la stringa in minuscolo per accettare qualsiasi combinazione di maiuscole/minuscole
-    keyInput = keyInput.trim().toLowerCase();
+            // Sanificazione dell'input in minuscolo e pulizia spazi
+            keyInput = keyInput.trim().toLowerCase();
 
- 
-    const targetHash = "e6900ee1b94747eb8af76a392b95fae223ad0377fa2c554e7c7e90c109ecf4a6";
+            // L'impronta SHA-256 corretta della stringa "madrid"
+            const targetHash = "e6900ee1b94747eb8af76a392b95fae223ad0377fa2c554e7c7e90c109ecf4a6";
 
-    // Convertiamo l'input dell'utente in un hash SHA-256
-    const msgBuffer = new TextEncoder().encode(keyInput);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    const inputHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            // Calcolo dell'hash nativo nel browser
+            const msgBuffer = new TextEncoder().encode(keyInput);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const inputHash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 
-    // Adesso il confronto avviene tra due impronte cifrate e case-insensitive!
-    if (inputHash === targetHash) {
-        errorMsg.style.display = 'none';
-        statusLabel.textContent = "MOUNTED / UNLOCKED";
-        statusLabel.style.color = "var(--neon-cyan)";
-        lockScreen.style.display = 'none';
+            if (inputHash === targetHash) {
+                errorMsg.style.display = 'none';
+                statusLabel.textContent = "MOUNTED / UNLOCKED";
+                statusLabel.style.color = "var(--neon-cyan)";
+                lockScreen.style.display = 'none';
 
-        // Iniettiamo le sorgenti reali nel DOM solo ad autenticazione riuscita
-        gridContainer.innerHTML = `
-            <!-- FOTO 1: RICCARDO 2004 -->
-            <div class="image-container" style="padding: 6px;">
-                <img src="Riccardo_2008.jpg" class="y2k-img heart-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo 2004" onerror="this.parentNode.style.display='none';">
-                <div class="caption" style="margin-top: 8px;">
-                    <strong>riccardo.jpg</strong>
-                    <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">[Format: 1:1] // Year: 2008</p>
-                </div>
-            </div>
+                // Iniezione degli elementi immagine reali solo ad autorizzazione completata
+                gridContainer.innerHTML = `
+                    <!-- FOTO 1: RICCARDO 2008 -->
+                    <div class="image-container" style="padding: 6px;">
+                        <img src="Riccardo_2008.jpg" class="y2k-img heart-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo 2008" onerror="this.parentNode.style.display='none';">
+                        <div class="caption" style="margin-top: 8px;">
+                            <strong>riccardo.jpg</strong>
+                            <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">[Format: 1:1] // Year: 2008</p>
+                        </div>
+                    </div>
 
-            <!-- FOTO 2: R1 -->
-            <div class="image-container" style="padding: 6px;">
-                <img src="r1.jpg" class="y2k-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo r1" onerror="this.parentNode.style.display='none';">
-                <div class="caption" style="margin-top: 8px;">
-                    <strong>Riccardo_2009.jpg</strong>
-                    <p style="font-size: 0.65rem; color: var(--neon-cyan); margin-top: 2px;">[Format: 16:9] // Tech_Snapshot</p>
-                </div>
-            </div>
-        `;
-    } else {
-        errorMsg.style.display = 'block';
-        document.getElementById('crypto-key').value = '';
-    }
-}
+                    <!-- FOTO 2: RICCARDO 2009 (R1) -->
+                    <div class="image-container" style="padding: 6px;">
+                        <img src="r1.jpg" class="y2k-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo 2009" onerror="this.parentNode.style.display='none';">
+                        <div class="caption" style="margin-top: 8px;">
+                            <strong>Riccardo_2009.jpg</strong>
+                            <p style="font-size: 0.65rem; color: var(--neon-cyan); margin-top: 2px;">[Format: 16:9] // Tech_Snapshot</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                errorMsg.style.display = 'block';
+                document.getElementById('crypto-key').value = '';
+            }
+        }
+
+        // Assegnazione sicura dei listener per evitare blocchi o glitch asincroni inline
+        document.getElementById('crypto-btn').addEventListener('click', checkCryptoKey);
+        document.getElementById('crypto-key').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                checkCryptoKey();
+            }
+        });
 
 
         // FORM SUBMISSION ENGINE
