@@ -206,7 +206,7 @@
 
         <!-- HEADER STILE PSP -->
         <header>
-            <div class="psp-logo">★ // [RICCARDO]</div>
+            <div class="psp-logo" id="glitch-target">★ // [RICCARDO]</div>
         </header>
 
         <!-- NAVIGATION BAR -->
@@ -228,7 +228,7 @@
             
             <div class="window-body">
                 <div style="font-size: 0.75rem; color: #718096; border-bottom: 1px solid #232a37; padding-bottom: 8px; margin-bottom: 15px; text-transform: uppercase;">
-                    🔒 SYSTEM_STATUS: OPERATIONAL //
+                    🔒 SYSTEM_STATUS: OPERATIONAL 
                 </div>
 
                 <p style="margin-bottom: 15px;">
@@ -243,9 +243,9 @@
                 <p style="margin-bottom: 10px;">In order to mount the files and jailbreak the system, you must gather the 6-letter key scattered across the whole website:</p>
                 
                 <ul>
-                    <li class="system-bullet"><span class="highlight-text">Click Everything:</span></li>
-                    <li class="system-bullet"><span class="highlight-text">Solve the Enigmas:</span></li>
-                    <li class="system-bullet"><span class="highlight-text">Reorder:</span> Put the letters together in the correct sequence to type the final word into the terminal decryptor.</li>
+                    <li class="system-bullet"><span class="highlight-text">Click Everything</span></li>
+                    <li class="system-bullet"><span class="highlight-text">Solve the Enigmas</span></li>
+                    <li class="system-bullet"><span class="highlight-text">Reorder:</span> Put the letters together in the correct sequence to make the word. Use the international alphabet.</li>
                 </ul>
 
                 <p style="margin-top: 15px; color: var(--neon-pink);">
@@ -253,7 +253,7 @@
                 </p>
 
                 <div style="margin-top: 25px; font-size: 0.75rem; color: #4a5568; text-align: center; border-top: 1px dashed rgba(0, 255, 204, 0.2); padding-top: 15px;">
-                    [END OF MANIFEST // GO BACK TO DETECT PROTOCOLS]
+                    [END OF MANIFEST]
                 </div>
             </div>
         </div>
@@ -266,6 +266,23 @@
             </div>
         </footer>
     </div>
+
+    <script>
+        // GLITCH EFFECT LOGIC
+        const glitchTarget = document.getElementById('glitch-target');
+        let glitchTimeout;
+
+        function triggerGlitch() {
+            clearTimeout(glitchTimeout);
+            glitchTarget.classList.add('glitch-active');
+            glitchTimeout = setTimeout(() => {
+                glitchTarget.classList.remove('glitch-active');
+            }, 400);
+        }
+
+        glitchTarget.addEventListener('mouseenter', triggerGlitch);
+        glitchTarget.addEventListener('click', triggerGlitch);
+    </script>
 
 </body>
 </html>
