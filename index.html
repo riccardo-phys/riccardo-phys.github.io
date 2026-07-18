@@ -63,49 +63,62 @@
             grid-column: 1 / -1;
         }
 
-        /* HEADER SONY PSP (XMB) */
+        /* HEADER SONY PSP (XMB) - PULITO */
         header {
             background: rgba(15, 18, 25, 0.85);
             border: 2px solid #2d3748;
             border-radius: 6px;
-            padding: 12px 15px;
+            padding: 15px;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             box-shadow: inset 0 0 12px rgba(0,255,204,0.15);
             margin-bottom: 10px;
         }
 
+        /* GLITCH EFFECT */
         .psp-logo {
             font-weight: bold; 
             color: var(--neon-pink);
-            font-size: 0.95rem;
+            font-size: 1.2rem;
             text-shadow: 0 0 5px rgba(255, 51, 102, 0.5);
-        }
-
-        .psp-menu {
-            display: flex;
-            gap: 15px;
-            list-style: none;
-        }
-
-        .psp-item {
-            color: #8899a6;
             cursor: pointer;
-            font-size: 0.8rem;
-            transition: all 0.2s;
+            position: relative;
+            user-select: none;
         }
 
-        .psp-item.active, .psp-item:hover {
-            color: var(--neon-cyan);
-            text-shadow: 0 0 8px var(--neon-cyan);
+        .psp-logo.glitch-active {
+            animation: glitch-anim 0.3s linear infinite;
         }
 
-        .psp-status {
-            font-size: 0.8rem;
-            color: #a0aec0;
-            display: flex;
-            gap: 10px;
+        .psp-logo.glitch-active::before,
+        .psp-logo.glitch-active::after {
+            content: '★ // [RICCARDO]';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .psp-logo.glitch-active::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff00c8;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim-2 0.3s infinite linear alternate-reverse;
+        }
+
+        .psp-logo.glitch-active::after {
+            left: -2px;
+            text-shadow: -2px 0 #00ffff;
+            clip: rect(85px, 450px, 140px, 0);
+            animation: glitch-anim-2 0.2s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { text-shadow: 2px 3px 0px rgba(255,0,0,0.5), -2px -3px 0px rgba(0,0,255,0.5); }
+            50% { text-shadow: -3px 1px 0px rgba(255,0,0,0.5), 3px -1px 0px rgba(0,0,255,0.5); }
+            100% { text-shadow: 2px -2px 0px rgba(255,0,0,0.5), -1px 3px 0px rgba(0,0,255,0.5); }
         }
 
         /* XBOX 360 BLADES NAV */
@@ -264,14 +277,7 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
 
-        .mp3-btn:active {
-            background: #0d1015;
-            border-color: var(--neon-pink);
-            color: var(--neon-pink);
-            transform: translateY(1px);
-        }
-
-        /* IPHONE 4 SIMULATOR CENTERED CLASS */
+        /* IPHONE 4 SIMULATOR */
         .iphone-wrapper {
             background: #0d0e12;
             padding: 20px 10px;
@@ -399,13 +405,6 @@
             box-shadow: inset 0 2px 5px rgba(0,0,0,0.8);
         }
 
-        .iphone-home-square {
-            width: 12px;
-            height: 12px;
-            border: 1.5px solid #666;
-            border-radius: 3px;
-        }
-
         /* IMAGE GALLERIES */
         .image-container {
             border: 1px solid #2d3748;
@@ -434,10 +433,6 @@
             aspect-ratio: 1 / 1;
         }
 
-        .y2k-img:hover {
-            filter: contrast(1.1) brightness(1.05) saturate(1.2);
-        }
-
         .caption {
             font-size: 0.7rem;
             color: #8899a6;
@@ -453,125 +448,102 @@
             gap: 15px;
         }
 
-        /* OUTLOOK EXPRESS WINDOW (XP STYLE) */
-        .window-xp-header {
-            background: linear-gradient(90deg, #166aee 0%, #0053e1 100%);
-        }
-
-        .xp-toolbar {
-            background: #ece9d8; 
-            padding: 5px 10px; 
-            border-bottom: 1px solid #d6d3c2; 
-            display: flex; 
-            gap: 15px; 
-            align-items: center;
-        }
-
-        .xp-send-btn {
-            background: none; 
-            border: none; 
-            cursor: pointer; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            gap: 2px;
-        }
-
-        .xp-body {
-            background: #ffffff; 
-            color: #000000; 
-            padding: 15px; 
-            position: relative;
-        }
-
-        .xp-alert {
-            display: none; 
-            position: absolute; 
-            top: 50%; 
-            left: 50%; 
-            transform: translate(-50%, -50%); 
-            width: 280px; 
-            background: #ece9d8; 
-            border: 3px solid #0053e1; 
-            border-radius: 4px; 
-            box-shadow: 5px 5px 15px rgba(0,0,0,0.5); 
-            z-index: 100; 
-            font-family: Tahoma, sans-serif; 
-            padding: 2px;
-        }
-
-        .xp-alert-header {
-            background: linear-gradient(90deg, #166aee 0%, #0053e1 100%); 
-            color: #fff; 
-            font-weight: bold; 
-            font-size: 0.75rem; 
-            padding: 4px 8px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-        }
-
-        .xp-alert-btn {
-            background: #ece9d8; 
-            border: 1px solid #716f64; 
-            padding: 4px 15px; 
-            font-size: 0.75rem; 
-            box-shadow: inset -1px -1px 1px #888, inset 1px 1px 1px #fff; 
-            cursor: pointer; 
-            outline: none;
-        }
-
-        .xp-form-row {
-            display: flex; 
-            align-items: center; 
-            border-bottom: 1px solid #e0dfdb; 
-            padding-bottom: 8px;
-        }
-
-        .xp-label {
-            width: 80px; 
-            font-size: 0.8rem; 
-            color: #716f64; 
-            font-weight: bold;
-        }
-
-        .xp-input {
-            flex-grow: 1; 
-            border: none; 
-            outline: none; 
-            font-size: 0.85rem; 
-            padding: 2px 5px; 
-            background: transparent;
-        }
-
-        /* SYSTEM LOGS & TEXT */
-        .sys-log {
-            font-size: 0.75rem;
-            color: #9f7aea;
+        /* ARCHIVE ENCRYPTION SYSTEM STYLE */
+        .crypto-overlay {
+            grid-column: 1 / -1;
+            background: radial-gradient(circle, #1a080d 0%, #050002 100%);
+            border: 2px dashed var(--neon-pink);
+            border-radius: 6px;
+            padding: 30px 20px;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 15px;
+            box-shadow: inset 0 0 20px rgba(255, 51, 102, 0.3);
         }
 
-        .sys-line {
-            border-bottom: 1px dashed rgba(159, 122, 234, 0.2);
-            padding: 3px 0;
-            word-break: break-all;
-        }
-
-        .glow-text {
+        .crypto-title {
             color: var(--neon-pink);
-            text-shadow: 0 0 8px rgba(255, 51, 102, 0.6);
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-shadow: 0 0 8px rgba(255, 51, 102, 0.7);
+            letter-spacing: 2px;
+            animation: pulse-warn 1.5s infinite ease-in-out;
         }
 
-        /* RESPONSIVE DESIGN */
+        .crypto-input-wrapper {
+            display: flex;
+            border: 2px solid var(--neon-pink);
+            background: #000;
+            border-radius: 4px;
+            overflow: hidden;
+            max-width: 320px;
+            width: 100%;
+            box-shadow: 0 0 10px rgba(255, 51, 102, 0.2);
+        }
+
+        .crypto-field {
+            background: transparent;
+            border: none;
+            outline: none;
+            padding: 10px;
+            color: #ff3366;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9rem;
+            flex-grow: 1;
+            text-align: center;
+            letter-spacing: 3px;
+        }
+
+        .crypto-btn {
+            background: var(--neon-pink);
+            border: none;
+            color: #fff;
+            padding: 0 15px;
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
+
+        .crypto-btn:hover {
+            background: #cc0044;
+            text-shadow: 0 0 5px #fff;
+        }
+
+        .blurred-placeholder {
+            filter: blur(25px) brightness(0.3) saturate(0.5);
+            pointer-events: none;
+            user-select: none;
+        }
+
+        @keyframes pulse-warn {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+
+        /* OUTLOOK EXPRESS WINDOW (XP STYLE) */
+        .window-xp-header { background: linear-gradient(90deg, #166aee 0%, #0053e1 100%); }
+        .xp-toolbar { background: #ece9d8; padding: 5px 10px; border-bottom: 1px solid #d6d3c2; display: flex; gap: 15px; align-items: center; }
+        .xp-send-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+        .xp-body { background: #ffffff; color: #000000; padding: 15px; position: relative; }
+        .xp-alert { display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 280px; background: #ece9d8; border: 3px solid #0053e1; border-radius: 4px; box-shadow: 5px 5px 15px rgba(0,0,0,0.5); z-index: 100; font-family: Tahoma, sans-serif; padding: 2px; }
+        .xp-alert-header { background: linear-gradient(90deg, #166aee 0%, #0053e1 100%); color: #fff; font-weight: bold; font-size: 0.75rem; padding: 4px 8px; display: flex; justify-content: space-between; align-items: center; }
+        .xp-form-row { display: flex; align-items: center; border-bottom: 1px solid #e0dfdb; padding-bottom: 8px; }
+        .xp-label { width: 80px; font-size: 0.8rem; color: #716f64; font-weight: bold; }
+        .xp-input { flex-grow: 1; border: none; outline: none; font-size: 0.85rem; padding: 2px 5px; background: transparent; }
+
+        .sys-log { font-size: 0.75rem; color: #9f7aea; display: flex; flex-direction: column; gap: 6px; }
+        .sys-line { border-bottom: 1px dashed rgba(159, 122, 234, 0.2); padding: 3px 0; word-break: break-all; }
+
         @media (max-width: 768px) {
             body { padding: 8px; }
             .desktop { grid-template-columns: 1fr; gap: 12px; }
-            header { flex-direction: column; gap: 8px; text-align: center; padding: 10px; }
-            .psp-menu { justify-content: center; width: 100%; }
-            .psp-item { font-size: 0.75rem; }
-            .psp-status { font-size: 0.7rem; }
+            header { padding: 12px; }
         }
     </style>
 </head>
@@ -579,19 +551,9 @@
 
     <div class="desktop">
 
-        <!-- HEADER STILE PSP (XMB) -->
+        <!-- HEADER STILE PSP (PULITO E CENTRALIZZATO) -->
         <header class="full-width">
-            <div class="psp-logo">★ // [RICCARDO]</div>
-            <ul class="psp-menu">
-                <li class="psp-item active">■ HOME</li>
-                <li class="psp-item">▲ MUSIC</li>
-                <li class="psp-item">● PHOTOS</li>
-                <li class="psp-item">✖ SETTINGS</li>
-            </ul>
-            <div class="psp-status">
-                <span>[Memory Stick Pro Duo]</span>
-                <span>⚡ 7%</span>
-            </div>
+            <div class="psp-logo" id="glitch-target">★ // [RICCARDO]</div>
         </header>
 
         <!-- XBOX 360 BLADES DASHBOARD NAV -->
@@ -601,7 +563,7 @@
             <div class="blade">Media</div>
         </div>
 
-        <!-- WINDOW 1: LETTORE MP3 / MEDIA PLAYER -->
+        <!-- WINDOW 1: LETTORE MP3 -->
         <div class="window">
             <div class="window-header">
                 <span>360_Media_Center.xex</span>
@@ -619,12 +581,11 @@
                             <span>96 kbps</span>
                         </div>
                         <div class="track-info">
-                            <span class="glow-text">PLAYING >> </span>
+                            <span class="glow-text" style="color: var(--neon-pink);">PLAYING >> </span>
                             <span>[02:14 / 06:17]</span>
                         </div>
                         <img src="https://c.tenor.com/p2w1siLrDksAAAAC/tenor.gif" class="heart-wave" alt="Heart Waveform">
                     </div>
-                    
                     <div class="mp3-controls">
                         <button class="mp3-btn" onclick="alert('Ciaoooo')">■</button>
                         <button class="mp3-btn" onclick="alert('Who ordered that?')">▶</button>
@@ -634,7 +595,7 @@
             </div>
         </div>
 
-        <!-- WINDOW 2: IPHONE 4 CALL SIMULATOR -->
+        <!-- WINDOW 2: IPHONE 4 SIMULATOR -->
         <div class="window">
             <div class="window-header">
                 <span>iPhone_4_Physical_Simulator.app</span>
@@ -648,37 +609,30 @@
                 <div class="iphone-chassis">
                     <div class="iphone-speaker"></div>
                     <div class="iphone-camera-lens"></div>
-
                     <div class="iphone-screen">
                         <div class="ios-statusbar">
                             <span>AT&T 3G</span>
                             <span>4:20 PM</span>
                             <span>🔋 100%</span>
                         </div>
-
                         <div class="ios-call-screen">
                             <div style="text-align: center;">
                                 <h2 style="font-size: 22px; font-weight: normal; margin-bottom: 4px; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8);">Jesse Pinkman</h2>
                                 <div id="call-status" style="font-size: 13px; color: #d1e2f2; font-weight: 300; text-shadow: 0 1px 3px rgba(0,0,0,0.6);">calling...</div>
                             </div>
-
                             <audio id="jesse-audio" src="jesse.mp3" preload="auto"></audio>
-
                             <div class="ios-btn-container">
                                 <button onclick="handleJesseAudio('toggle')" id="jesse-play-btn" class="ios-btn ios-btn-green">Start Call</button>
                                 <button onclick="handleJesseAudio('stop')" class="ios-btn ios-btn-red">End Call</button>
                             </div>
                         </div>
                     </div>
-
-                    <div class="iphone-home-button">
-                        <div class="iphone-home-square"></div>
-                    </div>
+                    <div class="iphone-home-button"><div style="width: 12px; height: 12px; border: 1.5px solid #666; border-radius: 3px;"></div></div>
                 </div>
             </div>
         </div>
 
-        <!-- WINDOW 3: FILE SYSTEM & CONSOLE LOG -->
+        <!-- WINDOW 3: CONSOLE LOG -->
         <div class="window">
             <div class="window-header">
                 <span>system_log.txt</span>
@@ -733,7 +687,7 @@
             <div class="window-body" style="display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 300px; background: #050505;">
                 <div class="image-container" style="border: none; background: transparent; width: 100%; max-width: 280px; aspect-ratio: 9 / 16; display: flex; align-items: center; justify-content: center; overflow: visible;">
                     <img src="https://i.pinimg.com/736x/55/f6/fc/55f6fcc542e0299eb9c7ccd2f1e09c06.jpg" 
-                         style="width: 100%; height: 100%; object-fit: cover; transform: rotate(-90deg) scale(1.3); border-radius: 4px; transition: filter 0.3s;" 
+                         style="width: 100%; height: 100%; object-fit: cover; transform: rotate(-90deg) scale(1.3); border-radius: 4px;" 
                          alt="Rotated Portrait">
                 </div>
                 <div class="caption" style="margin-top: 15px; z-index: 10;">ID: ROTATED_AESTHETIC_Pi/2_RADIANT // BYPASS: VERTICAL_LIMITS</div>
@@ -763,8 +717,8 @@
             </div>
         </div>
 
-        <!-- WINDOW 7: BACKUP FOTO ARTIFACTS -->
-        <div class="window full-width">
+        <!-- WINDOW 7: CARTELLA RECOVERY MULTIMEDIALE CRIPTATA -->
+        <div class="window full-width" id="photo-archive-window">
             <div class="window-header">
                 <span>D:\Backup\Riccardo_Archive_Photos\</span>
                 <div class="window-controls">
@@ -773,33 +727,41 @@
                     <span class="win-btn btn-close"></span>
                 </div>
             </div>
-            <div class="window-body" style="background: #11141a;">
+            <div class="window-body" style="background: #11141a; position: relative;" id="archive-body-container">
+                
                 <div style="font-size: 0.75rem; color: #a0aec0; border-bottom: 1px solid #232a37; padding-bottom: 8px; margin-bottom: 15px; text-transform: uppercase;">
-                    📂 Directory: 2 Files Found // System Recovery
+                    📂 Directory: 2 Files Detected // Access: <span id="crypto-status" style="color: var(--neon-pink);">RESTRICTED</span>
                 </div>
 
-                <div class="explorer-grid">
-                    <!-- FOTO 1: RICCARDO 2004 -->
-                    <div class="image-container" style="padding: 6px;">
-                        <img src="riccardo_2004.jpg" class="y2k-img heart-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo 2004" onerror="this.style.display='none';">
-                        <div class="caption" style="margin-top: 8px;">
-                            <strong>riccardo.jpg</strong>
-                            <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">[Format: 1:1] // Year: 2008</p>
-                        </div>
+                <!-- COPERTURA DI SICUREZZA (STILE RETRO FILM HACKER) -->
+                <div id="crypto-lock-screen" class="crypto-overlay">
+                    <div class="crypto-title">[!] CRITICAL ALERT: DATA ENCRYPTED [!]</div>
+                    <p style="font-size: 0.75rem; color: #8899a6; max-width: 500px; text-transform: uppercase;">
+                        This partition contains analog hardware snapshots registered by USER_RICCARDO. Enter security authentication bypass key to mount image files.
+                    </p>
+                    <div class="crypto-input-wrapper">
+                        <input type="password" id="crypto-key" placeholder="ENTER ACCESS KEY" class="crypto-field" onkeydown="if(event.key === 'Enter') checkCryptoKey()">
+                        <button onclick="checkCryptoKey()" class="crypto-btn">Decrypt</button>
                     </div>
+                    <div id="crypto-error" style="font-size: 0.7rem; color: var(--neon-pink); display: none; text-transform: uppercase; margin-top: 5px;">
+                        [-] ACCESS DENIED: INVALID KEY STRING
+                    </div>
+                </div>
 
-                    <!-- FOTO 2: R1 -->
+                <!-- LA GRIGLIA REALE (Contiene solo immagini fittizie e sfocate inizialmente) -->
+                <div class="explorer-grid" id="secure-photo-grid">
                     <div class="image-container" style="padding: 6px;">
-                        <img src="r1.jpg" class="y2k-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo r1" onerror="this.style.display='none';">
-                        <div class="caption" style="margin-top: 8px;">
-                            <strong>2009.jpg</strong>
-                            <p style="font-size: 0.65rem; color: var(--neon-cyan); margin-top: 2px;">[Format: 16:9] // Tech_Snapshot</p>
-                        </div>
+                        <div class="y2k-img heart-img blurred-placeholder" style="background: #22050c; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: var(--neon-pink);">ENCRYPTED_DATA_LOCK</div>
+                        <div class="caption" style="margin-top: 8px;"><strong>riccardo.jpg</strong></div>
+                    </div>
+                    <div class="image-container" style="padding: 6px;">
+                        <div class="y2k-img blurred-placeholder" style="background: #22050c; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; color: var(--neon-pink);">ENCRYPTED_DATA_LOCK</div>
+                        <div class="caption" style="margin-top: 8px;"><strong>2009.jpg</strong></div>
                     </div>
                 </div>
 
                 <div style="margin-top: 15px; font-size: 0.7rem; color: #718096; text-align: center; border-top: 1px dashed rgba(255, 51, 102, 0.2); padding-top: 10px;">
-                    [!] Analog memories mounted successfully. Files are locked in the database.
+                    [!] Cryptographic protection engine: AES-Retro-808 active.
                 </div>
             </div>
         </div>
@@ -832,7 +794,6 @@
             </div>
 
             <div class="window-body xp-body">
-                <!-- POP-UP DI CONFERMA INVIO (XP Style Alert) -->
                 <div id="xp-alert-box" class="xp-alert">
                     <div class="xp-alert-header">
                         <span>System Message</span>
@@ -847,35 +808,29 @@
                     </div>
                 </div>
 
-                <!-- FORM DI CONTATTO -->
                 <form id="xp-contact-form" action="https://formspree.io/f/mpqvqvdk" method="POST" style="display: flex; flex-direction: column; gap: 12px; font-family: Tahoma, sans-serif;">
                     <div class="xp-form-row">
                         <label for="user-name" class="xp-label">From:</label>
                         <input type="text" id="user-name" placeholder="Anonymous Sender" class="xp-input">
                         <span style="font-size: 0.7rem; color: #a0a0a0; padding-right: 5px; font-style: italic;">[optional]</span>
                     </div>
-
                     <div class="xp-form-row">
                         <label for="user-email" class="xp-label">Email:</label>
                         <input type="email" id="user-email" placeholder="your_email@domain.com" class="xp-input" style="color: #000;">
                         <span style="font-size: 0.7rem; color: #a0a0a0; padding-right: 5px; font-style: italic;">[optional]</span>
                     </div>
-
                     <div class="xp-form-row">
                         <label for="user-subject" class="xp-label">Subject:</label>
                         <input type="text" id="user-subject" placeholder="808s_Feedback_System" class="xp-input" style="color: #000;">
                         <span style="font-size: 0.7rem; color: #a0a0a0; padding-right: 5px; font-style: italic;">[optional]</span>
                     </div>
-
                     <div style="margin-top: 10px;">
                         <textarea id="user-message" required placeholder="Type your analog message here..." style="width: 100%; min-height: 120px; border: 1px solid #b5b2a1; padding: 10px; font-size: 0.9rem; outline: none; resize: vertical; font-family: 'Share Tech Mono', monospace; background-color: #fafafa; color: #111;"></textarea>
                     </div>
-
                     <input type="hidden" name="name" id="fs-static-name" value="RICCARDO_OS_USER">
                     <input type="hidden" name="email" id="fs-static-email" value="noreply@riccardophys.github.io">
                     <input type="hidden" name="_subject" id="fs-static-subject" value="[RICCARDO_OS] New Form Submission">
                     <input type="hidden" name="message" id="fs-final-message">
-
                     <div style="display: flex; justify-content: flex-end; margin-top: 5px;">
                         <button type="submit" id="mobile-send-btn" style="background: linear-gradient(180deg, #0053e1 0%, #003db8 100%); color: white; border: 1px solid #002c9a; padding: 6px 20px; border-radius: 3px; cursor: pointer; font-size: 0.8rem; font-weight: bold;">
                             Send Message
@@ -891,15 +846,70 @@
             <div style="font-size: 0.7rem; color: #4a5568; letter-spacing: 1px;">
                 greetings from RICCARDO // SYSTEM OPERATIVE: Windows_XP v1.2 // TR-808 EMULATION CHIP ACTIVE
             </div>
-            <div style="font-size: 0.65rem; color: #ff3366;">
-                [!] WARNING: Unauthorized access to 808s frequencies will trigger emotional output errors.
-            </div>
         </footer>
     </div>
 
-    <!-- SCRIPT UNIFICATO E OTTIMIZZATO -->
     <script>
-        // FORM SUBMISSION & METADATA LOGIC
+        // TEMPORARY GLITCH EFFECT LOGIC
+        const glitchTarget = document.getElementById('glitch-target');
+        let glitchTimeout;
+
+        function triggerGlitch() {
+            clearTimeout(glitchTimeout);
+            glitchTarget.classList.add('glitch-active');
+            
+            // Il glitch si ferma automaticamente dopo 400ms
+            glitchTimeout = setTimeout(() => {
+                glitchTarget.classList.remove('glitch-active');
+            }, 400);
+        }
+
+        glitchTarget.addEventListener('mouseenter', triggerGlitch);
+        glitchTarget.addEventListener('click', triggerGlitch);
+
+
+        // SECURE CRYPTO DECRYPTION SYSTEM (Anti-Inspect Bypass)
+        function checkCryptoKey() {
+            const keyInput = document.getElementById('crypto-key').value;
+            const errorMsg = document.getElementById('crypto-error');
+            const statusLabel = document.getElementById('crypto-status');
+            const lockScreen = document.getElementById('crypto-lock-screen');
+            const gridContainer = document.getElementById('secure-photo-grid');
+
+            if (keyInput === 'Madrid') {
+                errorMsg.style.display = 'none';
+                statusLabel.textContent = "MOUNTED / UNLOCKED";
+                statusLabel.style.color = "var(--neon-cyan)";
+                lockScreen.style.display = 'none';
+
+                // Generiamo l'HTML pulito iniettando le sorgenti reali solo adesso
+                gridContainer.innerHTML = `
+                    <!-- FOTO 1: RICCARDO 2004 -->
+                    <div class="image-container" style="padding: 6px;">
+                        <img src="riccardo_2004.jpg" class="y2k-img heart-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo 2004" onerror="this.parentNode.style.display='none';">
+                        <div class="caption" style="margin-top: 8px;">
+                            <strong>riccardo.jpg</strong>
+                            <p style="font-size: 0.65rem; color: var(--neon-pink); margin-top: 2px;">[Format: 1:1] // Year: 2008</p>
+                        </div>
+                    </div>
+
+                    <!-- FOTO 2: R1 -->
+                    <div class="image-container" style="padding: 6px;">
+                        <img src="r1.jpg" class="y2k-img" style="width: 100%; height: auto; object-fit: cover;" alt="Riccardo r1" onerror="this.parentNode.style.display='none';">
+                        <div class="caption" style="margin-top: 8px;">
+                            <strong>2009.jpg</strong>
+                            <p style="font-size: 0.65rem; color: var(--neon-cyan); margin-top: 2px;">[Format: 16:9] // Tech_Snapshot</p>
+                        </div>
+                    </div>
+                `;
+            } else {
+                errorMsg.style.display = 'block';
+                document.getElementById('crypto-key').value = '';
+            }
+        }
+
+
+        // FORM SUBMISSION ENGINE
         const contactForm = document.getElementById('xp-contact-form');
         const alertBox = document.getElementById('xp-alert-box');
         const sendBtnText = document.getElementById('send-btn-text');
@@ -907,7 +917,6 @@
 
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
-
             sendBtnText.textContent = "Sending...";
             mobileSendBtn.textContent = "Sending...";
             mobileSendBtn.disabled = true;
@@ -933,7 +942,7 @@ ${uMessage}
 TIMESTAMP:   ${new Date().toLocaleString()}
 TIMEZONE:    ${Intl.DateTimeFormat().resolvedOptions().timeZone}
 OS/BROWSER:  ${navigator.userAgent}
-SCREEN_RES:  ${window.screen.width}x${window.screen.height} (Window: ${window.innerWidth}x${window.innerHeight})
+SCREEN_RES:  ${window.screen.width}x${window.screen.height}
 LANG:        ${navigator.language || navigator.userLanguage}
 ====================================`;
 
@@ -949,11 +958,10 @@ LANG:        ${navigator.language || navigator.userLanguage}
                     alertBox.style.display = 'block';
                     contactForm.reset();
                 } else {
-                    alert("System Error: Could not deliver message to Riccardo.");
+                    alert("System Error: Could not deliver message.");
                 }
             })
             .catch(error => {
-                console.error('Error:', error);
                 alert("Network Connection Lost. Try again.");
             })
             .finally(() => {
@@ -963,11 +971,9 @@ LANG:        ${navigator.language || navigator.userLanguage}
             });
         });
 
-        function closeXpAlert() {
-            alertBox.style.display = 'none';
-        }
+        function closeXpAlert() { alertBox.style.display = 'none'; }
 
-        // IPHONE 4 SIMULATOR LOGIC (Optimized)
+        // IPHONE 4 SIMULATOR LOGIC
         const jesseAudio = document.getElementById('jesse-audio');
         const callStatus = document.getElementById('call-status');
         const jessePlayBtn = document.getElementById('jesse-play-btn');
@@ -982,7 +988,6 @@ LANG:        ${navigator.language || navigator.userLanguage}
                         jessePlayBtn.style.borderColor = "#145c14";
                     })
                     .catch(err => {
-                        console.log("Audio error:", err);
                         alert("Assicurati di aver caricato il file 'jesse.mp3' nella root di GitHub!");
                     });
                 } else {
@@ -999,7 +1004,6 @@ LANG:        ${navigator.language || navigator.userLanguage}
                 jessePlayBtn.textContent = "Start Call";
                 jessePlayBtn.style.background = "linear-gradient(180deg, #4ed04e 0%, #109010 50%, #006000 51%, #0b700b 100%)";
                 jessePlayBtn.style.borderColor = "#145c14";
-                
                 setTimeout(() => {
                     if (jesseAudio.paused && jesseAudio.currentTime === 0) {
                         callStatus.textContent = "calling...";
@@ -1015,7 +1019,6 @@ LANG:        ${navigator.language || navigator.userLanguage}
                 callStatus.textContent = `${minutes}:${seconds}`;
             }
         });
-
         jesseAudio.addEventListener('ended', () => handleJesseAudio('stop'));
     </script>
 </body>
