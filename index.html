@@ -636,18 +636,19 @@
                         </div>
                     </div>
 
-                    <!-- RE-DESIGN: Apple iPod Touch Ring (Click Wheel) -->
-                    <div style="position: relative; width: 150px; height: 150px; background: linear-gradient(180deg, #f7f9fa 0%, #e2e8f0 100%); border-radius: 50%; border: 1px solid #cbd5e0; box-shadow: 0 8px 20px rgba(0,0,0,0.4), inset 0 2px 5px #fff, inset 0 -2px 5px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; user-select: none; margin-top: 5px;">
-                        
-                        <!-- Controlli cliccabili incisi sulla ghiera -->
-                        <div onclick="alert('MENU')" style="position: absolute; top: 12px; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 0.7rem; font-weight: 700; color: #718096; cursor: pointer; letter-spacing: 0.5px;">MENU</div>
-                        <div onclick="alert('Who ordered that?')" style="position: absolute; bottom: 12px; font-size: 0.75rem; color: #718096; cursor: pointer; transform: scaleY(0.9);">▶||</div>
-                        <div onclick="alert('We fall apart as it gets dark')" style="position: absolute; right: 14px; font-size: 0.7rem; color: #718096; cursor: pointer;">&gt;&gt;|</div>
-                        <div onclick="alert('Ciaoooo')" style="position: absolute; left: 14px; font-size: 0.7rem; color: #718096; cursor: pointer;">|&lt;&lt;</div>
+                    <!-- RE-DESIGN: Apple iPod Touch Ring (Click Wheel) con Easter Egg -->
+<div style="position: relative; width: 150px; height: 150px; background: linear-gradient(180deg, #f7f9fa 0%, #e2e8f0 100%); border-radius: 50%; border: 1px solid #cbd5e0; box-shadow: 0 8px 20px rgba(0,0,0,0.4), inset 0 2px 5px #fff, inset 0 -2px 5px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; user-select: none; margin-top: 5px;">
+    
+    <!-- Tasto MENU con l'indovinello per la lettera A -->
+    <div onclick="showEasterEggA()" style="position: absolute; top: 12px; font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 0.7rem; font-weight: 700; color: #718096; cursor: pointer; letter-spacing: 0.5px;">MENU</div>
+    
+    <div onclick="alert('Who ordered that?')" style="position: absolute; bottom: 12px; font-size: 0.75rem; color: #718096; cursor: pointer; transform: scaleY(0.9);">▶||</div>
+    <div onclick="alert('We fall apart as it gets dark')" style="position: absolute; right: 14px; font-size: 0.7rem; color: #718096; cursor: pointer;">&gt;&gt;|</div>
+    <div onclick="alert('Ciaoooo')" style="position: absolute; left: 14px; font-size: 0.7rem; color: #718096; cursor: pointer;">|&lt;&lt;</div>
 
-                        <!-- Pulsante Centrale (Center Select Button) -->
-                        <button onclick="alert('TRACK SELECTED // v0.808')" style="width: 50px; height: 50px; background: linear-gradient(180deg, #edf2f7 0%, #cbd5e1 100%); border: 1px solid #bec8d5; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.15), inset 0 1px 0 #fff; cursor: pointer; outline: none; transition: transform 0.05s;" onmousedown="this.style.transform='scale(0.95)'" onmouseup="this.style.transform='scale(1)'"></button>
-                    </div>
+    <!-- Pulsante Centrale -->
+    <button onclick="alert('TRACK SELECTED // v0.808')" style="width: 50px; height: 50px; background: linear-gradient(180deg, #edf2f7 0%, #cbd5e1 100%); border: 1px solid #bec8d5; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.15), inset 0 1px 0 #fff; cursor: pointer; outline: none; transition: transform 0.05s;" onmousedown="this.style.transform='scale(0.95)'" onmouseup="this.style.transform='scale(1)'"></button>
+</div>
 
                 </div>
 
@@ -970,6 +971,16 @@
         glitchTarget.addEventListener('mouseenter', triggerGlitch);
         glitchTarget.addEventListener('click', triggerGlitch);
 
+
+        // EASTER EGG PULSANTE MENU IPOD
+        function showEasterEggA() {
+    alert(
+        "== EASTER EGG [1/6] ==\n\n" +
+        "Solve for 'x' to find the index of the 1st letter (A):\n\n" +
+        "x = floor( 𝒿 e^(-t²) dt ) from -∞ to +∞\n\n" +
+        "Hint: The result points directly to its place in the alphabet."
+    );
+}
 
         // SECURE RETRO CRYPTO DECRYPTION SYSTEM WITH MATRIX DECODE EFFECT
         async function checkCryptoKey() {
